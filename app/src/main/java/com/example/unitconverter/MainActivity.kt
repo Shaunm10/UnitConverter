@@ -1,13 +1,19 @@
 package com.example.unitconverter
 
+import android.graphics.drawable.Icon
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material3.Button
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Surface
@@ -46,19 +52,23 @@ fun UnitConverter(){
             // Event handler code when value of the text is changed.
         } )
         Row {
-            val context = LocalContext.current
-            // in a Row, all the UI elements will be stacked next to each other.
-           Button(onClick = {
+            // we need a box because the drop down needs a parent
+            Box{
+               Button(onClick = { /*TODO*/ }) {
+                   Text(text = "Select")
+                   Icon(Icons.Default.ArrowDropDown, contentDescription = "Arrow Down" )
+                   //Icon(Icons.Default.ArrowDropDown, contentDescription = "Arrow down")
+               }
+            }
+            // we need a box because the drop down needs a parent
+            Box{
+                Button(onClick = { /*TODO*/ }) {
+                    Text(text = "Select")
+                    Icon(Icons.Default.ArrowDropDown, contentDescription = "Arrow Down" )
 
-                Toast.makeText(context,
-                    "I was clicked",
-                    Toast.LENGTH_SHORT).show()
-
-           }) {
-               Text(text = "MyButton")
-           }
+                }
+            }
         }
-
     }
 }
 
