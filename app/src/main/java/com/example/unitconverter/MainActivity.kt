@@ -79,11 +79,3 @@ fun UnitConverterPreview(){
     UnitConverter()
 
 }
-
-//@Preview(showBackground = true)
-//@Composable
-//fun GreetingPreview() {
-//    UnitConverterTheme {
-//        UnitConverter()
-//    }
-//}
