@@ -16,6 +16,8 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material3.Button
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.ui.unit.dp
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -73,6 +75,26 @@ fun UnitConverter(){
                    Icon(Icons.Default.ArrowDropDown, contentDescription = "Arrow Down" )
                    //Icon(Icons.Default.ArrowDropDown, contentDescription = "Arrow down")
                }
+                DropdownMenu(expanded = false, onDismissRequest = {
+                /*TODO*/
+                }) {
+                    DropdownMenuItem(
+                        text = { Text(text = "Centimeter") },
+                        onClick = { /*TODO*/ }
+                    )
+                    DropdownMenuItem(
+                        text = { Text(text = "Meters") },
+                        onClick = { /*TODO*/ }
+                    )
+                    DropdownMenuItem(
+                        text = { Text(text = "Feet") },
+                        onClick = { /*TODO*/ }
+                    )
+                    DropdownMenuItem(
+                        text = { Text(text = "Milimeters") },
+                        onClick = { /*TODO*/ }
+                    )
+                }
             }
             // we need a box because the drop down needs a parent
             Box{
@@ -80,6 +102,26 @@ fun UnitConverter(){
                     Text(text = "Select")
                     Icon(Icons.Default.ArrowDropDown, contentDescription = "Arrow Down" )
 
+                }
+                DropdownMenu(expanded = false, onDismissRequest = {
+                    /*TODO*/
+                }) {
+                    DropdownMenuItem(
+                        text = { Text(text = "Centimeter") },
+                        onClick = { /*TODO*/ }
+                    )
+                    DropdownMenuItem(
+                        text = { Text(text = "Meters") },
+                        onClick = { /*TODO*/ }
+                    )
+                    DropdownMenuItem(
+                        text = { Text(text = "Feet") },
+                        onClick = { /*TODO*/ }
+                    )
+                    DropdownMenuItem(
+                        text = { Text(text = "Milimeters") },
+                        onClick = { /*TODO*/ }
+                    )
                 }
             }
         }
