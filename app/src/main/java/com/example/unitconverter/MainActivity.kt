@@ -97,6 +97,7 @@ fun UnitConverter(){
                 }
             }
             // we need a box because the drop down needs a parent
+            Spacer(modifier = Modifier.width(16.dp))
             Box{
                 Button(onClick = { /*TODO*/ }) {
                     Text(text = "Select")
