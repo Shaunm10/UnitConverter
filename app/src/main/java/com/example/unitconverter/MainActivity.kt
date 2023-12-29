@@ -46,7 +46,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                   UnitConverter()
+                    UnitConverter()
                 }
             }
         }
@@ -54,13 +54,16 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun UnitConverter(){
+fun UnitConverter() {
 
     // state
-    var inputValue by remember { mutableStateOf("")}
-    var outputValue by remember { mutableStateOf("")}
-    var inputUnit by remember { mutableStateOf("")}
-    var outputUnit by remember { mutableStateOf("")}
+    var inputValue by remember { mutableStateOf("") }
+    var outputValue by remember { mutableStateOf("") }
+    var inputUnit by remember { mutableStateOf("") }
+    var outputUnit by remember { mutableStateOf("") }
+    var isInputExpanded by remember { mutableStateOf(false) }
+    var isOututExpanded by remember { mutableStateOf(false) }
+    val conversionFactor = remember { mutableStateOf(0.01) }
 
 
     Column(
@@ -74,21 +77,22 @@ fun UnitConverter(){
         Text("Unit Converter ")
 
         Spacer(modifier = Modifier.height(16.dp))
-        OutlinedTextField(value = "", onValueChange ={
-            val myText = it
+        OutlinedTextField(value = inputValue, onValueChange = {
             // Event handler code when value of the text is changed.
-        } )
+            inputValue = it
+
+        })
         Spacer(modifier = Modifier.height(16.dp))
         Row {
             // we need a box because the drop down needs a parent
-            Box{
-               Button(onClick = { /*TODO*/ }) {
-                   Text(text = "Select")
-                   Icon(Icons.Default.ArrowDropDown, contentDescription = "Arrow Down" )
-                   //Icon(Icons.Default.ArrowDropDown, contentDescription = "Arrow down")
-               }
+            Box {
+                Button(onClick = { /*TODO*/ }) {
+                    Text(text = "Select")
+                    Icon(Icons.Default.ArrowDropDown, contentDescription = "Arrow Down")
+                    //Icon(Icons.Default.ArrowDropDown, contentDescription = "Arrow down")
+                }
                 DropdownMenu(expanded = false, onDismissRequest = {
-                /*TODO*/
+                    /*TODO*/
                 }) {
                     DropdownMenuItem(
                         text = { Text(text = "Centimeter") },
@@ -110,10 +114,10 @@ fun UnitConverter(){
             }
             // we need a box because the drop down needs a parent
             Spacer(modifier = Modifier.width(16.dp))
-            Box{
+            Box {
                 Button(onClick = { /*TODO*/ }) {
                     Text(text = "Select")
-                    Icon(Icons.Default.ArrowDropDown, contentDescription = "Arrow Down" )
+                    Icon(Icons.Default.ArrowDropDown, contentDescription = "Arrow Down")
 
                 }
                 DropdownMenu(expanded = false, onDismissRequest = {
@@ -146,7 +150,7 @@ fun UnitConverter(){
 
 @Preview(showBackground = true)
 @Composable
-fun UnitConverterPreview(){
+fun UnitConverterPreview() {
     UnitConverter()
 
 }
