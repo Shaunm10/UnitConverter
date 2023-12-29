@@ -62,7 +62,7 @@ fun UnitConverter() {
     var inputUnit by remember { mutableStateOf("") }
     var outputUnit by remember { mutableStateOf("") }
     var isInputExpanded by remember { mutableStateOf(false) }
-    var isOututExpanded by remember { mutableStateOf(false) }
+    var isOutputExpanded by remember { mutableStateOf(false) }
     val conversionFactor = remember { mutableStateOf(0.01) }
 
 
@@ -77,11 +77,14 @@ fun UnitConverter() {
         Text("Unit Converter ")
 
         Spacer(modifier = Modifier.height(16.dp))
-        OutlinedTextField(value = inputValue, onValueChange = {
-            // Event handler code when value of the text is changed.
-            inputValue = it
-
-        })
+        OutlinedTextField(
+            value = inputValue,
+            onValueChange = {
+                // Event handler code when value of the text is changed.
+                inputValue = it
+            },
+            label = {Text("Enter Value")}
+        )
         Spacer(modifier = Modifier.height(16.dp))
         Row {
             // we need a box because the drop down needs a parent
