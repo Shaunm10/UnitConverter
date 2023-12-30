@@ -60,17 +60,19 @@ fun UnitConverter() {
     // state
     var inputValue by remember { mutableStateOf("") }
     var outputValue by remember { mutableStateOf("") }
-    var inputUnit by remember { mutableStateOf("") }
-    var outputUnit by remember { mutableStateOf("") }
+    var inputUnit by remember { mutableStateOf("Meters") }
+    var outputUnit by remember { mutableStateOf("Meters") }
     var isInputExpanded by remember { mutableStateOf(false) }
     var isOutputExpanded by remember { mutableStateOf(false) }
-    val conversionFactor = remember { mutableStateOf(0.01) }
+    val conversionFactor = remember { mutableStateOf(1.00) }
+    val outputConversionFactor = remember { mutableStateOf(1.00) }
 
     fun convertUnits() {
         // this will either be a double or NULL
         // ?: - elvis operator, like "??" in the languages.
         val inputValueDouble = inputValue.toDoubleOrNull() ?: 0.0
-        val result = (inputValueDouble * conversionFactor.value * 100).roundToInt() / 100
+        val result =
+            (inputValueDouble * conversionFactor.value * 100 / outputConversionFactor.value).roundToInt() / 100
         outputValue = result.toString()
 
     }
@@ -91,6 +93,7 @@ fun UnitConverter() {
             onValueChange = {
                 // Event handler code when value of the text is changed.
                 inputValue = it
+                convertUnits()
             },
             label = { Text("Enter Value") }
         )
@@ -102,7 +105,7 @@ fun UnitConverter() {
                     /*TODO*/
                     isInputExpanded = true
                 }) {
-                    Text(text = "Select")
+                    Text(text = inputUnit)
                     Icon(Icons.Default.ArrowDropDown, contentDescription = "Arrow Down")
 
                 }
@@ -156,7 +159,7 @@ fun UnitConverter() {
                 Button(onClick = {
                     isOutputExpanded = true
                 }) {
-                    Text(text = "Select")
+                    Text(text = outputUnit)
                     Icon(Icons.Default.ArrowDropDown, contentDescription = "Arrow Down")
 
                 }
@@ -166,25 +169,45 @@ fun UnitConverter() {
                 }) {
                     DropdownMenuItem(
                         text = { Text(text = "Centimeter") },
-                        onClick = { /*TODO*/ }
+                        onClick = {
+                            isOutputExpanded = false
+                            outputUnit = "Centimeter"
+                            outputConversionFactor.value = 0.01
+                            convertUnits()
+                        }
                     )
                     DropdownMenuItem(
                         text = { Text(text = "Meters") },
-                        onClick = { /*TODO*/ }
+                        onClick = {
+                            isOutputExpanded = false
+                            outputUnit = "Meters"
+                            outputConversionFactor.value = 1.0
+                            convertUnits()
+                        }
                     )
                     DropdownMenuItem(
                         text = { Text(text = "Feet") },
-                        onClick = { /*TODO*/ }
+                        onClick = {
+                            isOutputExpanded = false
+                            outputUnit = "Feet"
+                            outputConversionFactor.value = 0.3048
+                            convertUnits()
+                        }
                     )
                     DropdownMenuItem(
                         text = { Text(text = "Milimeters") },
-                        onClick = { /*TODO*/ }
+                        onClick = {
+                            isOutputExpanded = false
+                            outputUnit = "Milimeters"
+                            outputConversionFactor.value = 0.001
+                            convertUnits()
+                        }
                     )
                 }
             }
         }
         Spacer(modifier = Modifier.height(16.dp))
-        Text("Result:")
+        Text("Result: ${outputValue} ${outputUnit}")
     }
 }
 
