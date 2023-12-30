@@ -89,17 +89,27 @@ fun UnitConverter() {
         Row {
             // we need a box because the drop down needs a parent
             Box {
-                Button(onClick = { /*TODO*/ }) {
+                Button(onClick = {
+                /*TODO*/
+                    isInputExpanded = true
+                }) {
                     Text(text = "Select")
                     Icon(Icons.Default.ArrowDropDown, contentDescription = "Arrow Down")
                     //Icon(Icons.Default.ArrowDropDown, contentDescription = "Arrow down")
                 }
-                DropdownMenu(expanded = false, onDismissRequest = {
-                    /*TODO*/
-                }) {
+                DropdownMenu(
+                    expanded = isInputExpanded,
+                    onDismissRequest = {
+                        isInputExpanded = false
+                    }
+                    ) {
                     DropdownMenuItem(
                         text = { Text(text = "Centimeter") },
-                        onClick = { /*TODO*/ }
+                        onClick = {
+                        isInputExpanded = false
+                        inputUnit = "Centimeter"
+                        conversionFactor.value = 0.01
+                        }
                     )
                     DropdownMenuItem(
                         text = { Text(text = "Meters") },
@@ -118,13 +128,16 @@ fun UnitConverter() {
             // we need a box because the drop down needs a parent
             Spacer(modifier = Modifier.width(16.dp))
             Box {
-                Button(onClick = { /*TODO*/ }) {
+                Button(onClick = {
+                        isOutputExpanded = true
+                    }) {
                     Text(text = "Select")
                     Icon(Icons.Default.ArrowDropDown, contentDescription = "Arrow Down")
 
                 }
-                DropdownMenu(expanded = false, onDismissRequest = {
-                    /*TODO*/
+                DropdownMenu(expanded = isOutputExpanded, onDismissRequest = {
+                    isOutputExpanded = false
+
                 }) {
                     DropdownMenuItem(
                         text = { Text(text = "Centimeter") },
