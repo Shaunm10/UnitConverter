@@ -34,6 +34,7 @@ import androidx.compose.ui.Modifier
 
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.unitconverter.ui.theme.UnitConverterTheme
+import kotlin.math.roundToInt
 
 class MainActivity : ComponentActivity() {
 
@@ -65,6 +66,14 @@ fun UnitConverter() {
     var isOutputExpanded by remember { mutableStateOf(false) }
     val conversionFactor = remember { mutableStateOf(0.01) }
 
+    fun convertUnits() {
+        // this will either be a double or NULL
+        // ?: - elvis operator, like "??" in the languages.
+        val inputValueDouble = inputValue.toDoubleOrNull() ?: 0.0
+        val result = (inputValueDouble * conversionFactor.value * 100).roundToInt() / 100
+        outputValue = result.toString()
+
+    }
 
     Column(
         modifier = Modifier.fillMaxSize(),
@@ -83,45 +92,61 @@ fun UnitConverter() {
                 // Event handler code when value of the text is changed.
                 inputValue = it
             },
-            label = {Text("Enter Value")}
+            label = { Text("Enter Value") }
         )
         Spacer(modifier = Modifier.height(16.dp))
         Row {
             // we need a box because the drop down needs a parent
             Box {
                 Button(onClick = {
-                /*TODO*/
+                    /*TODO*/
                     isInputExpanded = true
                 }) {
                     Text(text = "Select")
                     Icon(Icons.Default.ArrowDropDown, contentDescription = "Arrow Down")
-                    //Icon(Icons.Default.ArrowDropDown, contentDescription = "Arrow down")
+
                 }
                 DropdownMenu(
                     expanded = isInputExpanded,
                     onDismissRequest = {
                         isInputExpanded = false
                     }
-                    ) {
+                ) {
                     DropdownMenuItem(
                         text = { Text(text = "Centimeter") },
                         onClick = {
-                        isInputExpanded = false
-                        inputUnit = "Centimeter"
-                        conversionFactor.value = 0.01
+                            isInputExpanded = false
+                            inputUnit = "Centimeter"
+                            conversionFactor.value = 0.01
+                            convertUnits()
                         }
                     )
                     DropdownMenuItem(
                         text = { Text(text = "Meters") },
-                        onClick = { /*TODO*/ }
+                        onClick = {
+                            isInputExpanded = false
+                            inputUnit = "Meters"
+                            conversionFactor.value = 1.0
+                            convertUnits()
+                        }
                     )
                     DropdownMenuItem(
                         text = { Text(text = "Feet") },
-                        onClick = { /*TODO*/ }
+                        onClick = {
+                            isInputExpanded = false
+                            inputUnit = "Feet"
+                            conversionFactor.value = 0.3048
+                            convertUnits()
+                        }
                     )
                     DropdownMenuItem(
                         text = { Text(text = "Milimeters") },
-                        onClick = { /*TODO*/ }
+                        onClick = {
+                            isInputExpanded = false
+                            inputUnit = "Milimeters"
+                            conversionFactor.value = 0.001
+                            convertUnits()
+                        }
                     )
                 }
             }
@@ -129,8 +154,8 @@ fun UnitConverter() {
             Spacer(modifier = Modifier.width(16.dp))
             Box {
                 Button(onClick = {
-                        isOutputExpanded = true
-                    }) {
+                    isOutputExpanded = true
+                }) {
                     Text(text = "Select")
                     Icon(Icons.Default.ArrowDropDown, contentDescription = "Arrow Down")
 
