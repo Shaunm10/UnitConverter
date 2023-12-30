@@ -1,6 +1,7 @@
 package com.example.unitconverter
 
 
+import android.graphics.Paint.Style
 import android.os.Bundle
 
 import androidx.activity.ComponentActivity
@@ -33,6 +34,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.TextUnit
+import androidx.compose.ui.unit.TextUnitType
 import com.example.unitconverter.ui.theme.UnitConverterTheme
 import kotlin.math.roundToInt
 
@@ -84,8 +87,7 @@ fun UnitConverter() {
     ) {
 
         // in a Column, all the UI elements will be stacked below each other.
-        Spacer(modifier = Modifier.height(16.dp))
-        Text("Unit Converter ")
+        Text("Unit Converter", style = MaterialTheme.typography.headlineLarge)
 
         Spacer(modifier = Modifier.height(16.dp))
         OutlinedTextField(
@@ -207,7 +209,10 @@ fun UnitConverter() {
             }
         }
         Spacer(modifier = Modifier.height(16.dp))
-        Text("Result: ${outputValue} ${outputUnit}")
+        Text(
+            "Result: ${outputValue} ${outputUnit}",
+            style = MaterialTheme.typography.headlineMedium
+        )
     }
 }
 
